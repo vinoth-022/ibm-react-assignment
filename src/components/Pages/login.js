@@ -12,7 +12,9 @@ const Login = ({ setLoginStatus }) => {
     };
 
     const handleLoginSubmit = (evt) => {
-        if (loginData.username === 'sonu' && loginData.password === 'sonu') {
+        const loggeduser = JSON.parse(localStorage.getItem("user"))
+
+        if (loginData.username === loggeduser.username && loginData.password === loggeduser.password) {
             setAfterLoginMessage(`Hi ${loginData.username}! You've logged in successfully!`);
             alert(`Hi ${loginData.username}! You've logged in successfully!`);
             setLoginData({ username: '', password: '' });

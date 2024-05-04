@@ -1,13 +1,13 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Login from "./login";
-import Home from "./home";
-import Page404 from "./page404";
+import Login from "./Pages/login";
+import Home from "./Pages/home";
+import Page404 from "./Pages/page404";
 import Menubar from "./ControlPanel/menubar";
 import Logout from "./logout";
 import { useState } from "react";
 import EmpList from "./DataUnit/Table/empList";
 import CreateEmployeeData from "./DataUnit/createEmployeeData";
-
+import Register from "./Pages/register";
 
 
 const AppRoutes = () => {
@@ -45,6 +45,7 @@ const AppRoutes = () => {
                     <Routes>
                         <Route path="home" element={<Home />} />
                         <Route path="login" element={<Login setLoginStatus={updateLoginStatus} />} />
+                        <Route path="register" element={<Register />} />
                         <Route exact path="/" element={<Home />} />
                         <Route path="*" element={<Page404 loginStatus={isLoggedIn} />} />
                     </Routes>
