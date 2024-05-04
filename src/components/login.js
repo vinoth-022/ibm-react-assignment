@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const Login = ({ onLoginSuccess }) => {
+const Login = ({ setLoginStatus }) => {
     const [loginData, setLoginData] = useState({ username: '', password: '' });
     const [afterLoginMessage, setAfterLoginMessage] = useState('');
 
@@ -16,7 +16,7 @@ const Login = ({ onLoginSuccess }) => {
             setAfterLoginMessage(`Hi ${loginData.username}! You've logged in successfully!`);
             alert(`Hi ${loginData.username}! You've logged in successfully!`);
             setLoginData({ username: '', password: '' });
-            onLoginSuccess(true); 
+            setLoginStatus(true); 
         } else {
             setAfterLoginMessage(`Invalid credentials!`);
             alert(`Invalid credentials!`);
