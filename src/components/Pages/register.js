@@ -1,26 +1,30 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState } from "react"
+import { useNavigate } from "react-router-dom"
+import axios from 'axios';
 
 
 const Register = () => {
     const navigate = useNavigate()
 
-    const [registerData,setRegisterData] = useState({ username: '', password: '',email: '' });
+    const [registerData,setRegisterData] = useState({ username: '', password: '',email: '' })
 
     const handleRegisterInput = (evt) => {
         setRegisterData({
             ...registerData,
             [evt.target.name]: evt.target.value
-        });
-    };
+        })
+    }
 
-    const handleRegisterSubmit = (evt) => {
+    const handleRegisterSubmit = async (evt) => {
         evt.preventDefault()
-        localStorage.setItem('user',JSON.stringify(registerData))
-        navigate('/login')
+
+        try {
+            await axios.post('/register', registerData);
+            navigate('/login');
+        } catch (error) {
+            console.error('Error registering user', error);
+        }
     };
-
-
 
 
     return (

@@ -1,7 +1,8 @@
 const Home = () =>{
     return(
         <>
-        <h1>View home component</h1></>
+        <h1>View home component</h1>
+        </>
     )
 }
 

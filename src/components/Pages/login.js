@@ -1,8 +1,12 @@
+import axios from "axios";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 
 const Login = ({ setLoginStatus }) => {
     const [loginData, setLoginData] = useState({ username: '', password: '' });
     const [afterLoginMessage, setAfterLoginMessage] = useState('');
+    const navigate = useNavigate()
 
     const handleLoginInput = (evt) => {
         setLoginData({
@@ -11,20 +15,20 @@ const Login = ({ setLoginStatus }) => {
         });
     };
 
-    const handleLoginSubmit = (evt) => {
-        const loggeduser = JSON.parse(localStorage.getItem("user"))
+    const handleLoginSubmit = async (evt) => {
 
-        if (loginData.username === loggeduser.username && loginData.password === loggeduser.password) {
-            setAfterLoginMessage(`Hi ${loginData.username}! You've logged in successfully!`);
-            alert(`Hi ${loginData.username}! You've logged in successfully!`);
-            setLoginData({ username: '', password: '' });
-            setLoginStatus(true); 
-        } else {
-            setAfterLoginMessage(`Invalid credentials!`);
-            alert(`Invalid credentials!`);
+        evt.preventDefault();
+
+        try  {
+            const response = await axios.post('http://localhost:5000/login', loginData);
+            setAfterLoginMessage(response.data.message);
+            setLoginStatus(true);
+            navigate('/home');
+        } catch (error) {
+            setAfterLoginMessage('Invalid credentials');
             setLoginData({ username: '', password: '' });
         }
-        evt.preventDefault();
+        
     };
 
     return (
