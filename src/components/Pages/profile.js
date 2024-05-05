@@ -2,7 +2,9 @@ import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 
 const Profile = () => {
-    const [profileData, setProfileData] = useState(JSON.parse(localStorage.getItem('currentProfile')));
+    const storedProfile = JSON.parse(localStorage.getItem('currentProfile'));
+
+    const [profileData, setProfileData] = useState({ ...storedProfile, password: '' });
     console.log(profileData)
 
     // useEffect(() => {
@@ -14,7 +16,7 @@ const Profile = () => {
     //     }
     // }, []);
 
-    
+
     const handleUpdateInput = (evt) => {
         setProfileData({
             ...profileData,
@@ -26,10 +28,11 @@ const Profile = () => {
         evt.preventDefault()
 
         try {
-            await axios.post('/register', profileData)
-            // navigate('/login');
+            await axios.put(`http://localhost:5000/update`, profileData)
+                .then(response => 
+                    console.log(response.data.message))
         } catch (error) {
-            console.error('Error registering user', error)
+            console.error(error)
         }
     };
 
@@ -44,13 +47,13 @@ const Profile = () => {
                 <>
                     <form onSubmit={handleUpdateSubmit}>
                         <label htmlFor="username">User Name: </label>
-                        <input type="text" name="username" id="firstname" value={profileData.username} onChange={handleUpdateInput}/>
+                        <input type="text" name="username" id="firstname" value={profileData.username} onChange={handleUpdateInput} />
                         <br />
                         <label htmlFor="email">Email: </label>
-                        <input type="email" name="email" id="email" value={profileData.email} onChange={handleUpdateInput}/>
+                        <input type="email" name="email" id="email" value={profileData.email} onChange={handleUpdateInput} />
                         <br />
                         <label htmlFor="password">Password: </label>
-                        <input type="password" name="password" id="password" value={''} onChange={handleUpdateInput} placeholder="Enter Password" />
+                        <input type="password" name="password" id="password" value={profileData.password} onChange={handleUpdateInput} placeholder="Enter Password" />
                         <br />
 
                         <input type="submit" value="Update" />
