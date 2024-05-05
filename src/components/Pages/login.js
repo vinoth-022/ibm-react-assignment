@@ -34,7 +34,6 @@ const Login = ({ setLoginStatus }) => {
     return (
         <>
             <h1>Login Component</h1>
-            <p>Login to add employee</p>
             <form onSubmit={handleLoginSubmit}>
                 <input type="text" name="username" value={loginData.username} onChange={handleLoginInput} />
                 <input type="password" name="password" value={loginData.password} onChange={handleLoginInput} />

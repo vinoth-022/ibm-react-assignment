@@ -3,7 +3,7 @@ import Login from "./Pages/login";
 import Home from "./Pages/home";
 import Page404 from "./Pages/page404";
 import Menubar from "./ControlPanel/menubar";
-import Logout from "./logout";
+import LogOut from "./logout";
 import { useState } from "react";
 import EmpList from "./DataUnit/Table/empList";
 import CreateEmployeeData from "./DataUnit/createEmployeeData";
@@ -28,7 +28,7 @@ const AppRoutes = () => {
                     <Routes>
                         <Route path="home" element={<Home />} />
                         <Route path="emp" element={<EmpList />} />
-                        <Route path="logout" element={<Logout setLoginStatus={updateLoginStatus} />} />
+                        <Route path="logout" element={<LogOut setLoginStatus={updateLoginStatus} />} />
                         <Route exact path="/" element={<Home />} />
                         <Route exact path="createEmp" element={<CreateEmployeeData />} />
                         <Route path="*" element={<Page404 loginStatus={isLoggedIn} />} />
