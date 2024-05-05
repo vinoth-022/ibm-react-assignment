@@ -19,16 +19,32 @@ const Login = ({ setLoginStatus }) => {
 
         evt.preventDefault();
 
-        try  {
-            const response = await axios.post('http://localhost:5000/login', loginData);
-            setAfterLoginMessage(response.data.message);
-            setLoginStatus(true);
-            navigate('/home');
-        } catch (error) {
-            setAfterLoginMessage('Invalid credentials');
-            setLoginData({ username: '', password: '' });
-        }
-        
+        //below code is not setting afterLoginMessage after setAfterLoginMessage,so switched to another implementation
+
+        // try  {
+        //     const response = await axios.post('http://localhost:5000/login', loginData);
+        //     setAfterLoginMessage(response.data.message);
+        //     alert(afterLoginMessage)
+        //     setLoginStatus(true);
+        //     navigate('/home');
+        // } catch (error) {
+        //     setAfterLoginMessage('Invalid credentials');
+        //     setLoginData({ username: '', password: '' });
+        // }
+
+        axios.post('http://localhost:5000/login', loginData)
+            .then(response => {
+                setAfterLoginMessage(response.data.message);
+                alert(response.data.message); 
+                setLoginStatus(true);
+                navigate('/home');
+            })
+            .catch(error => {
+                setAfterLoginMessage('Invalid credentials');
+                setLoginData({ username: '', password: '' });
+            });
+
+
     };
 
     return (
@@ -39,9 +55,8 @@ const Login = ({ setLoginStatus }) => {
                 <input type="password" name="password" value={loginData.password} onChange={handleLoginInput} />
                 <input type="submit" value="Login" />
             </form>
-            <>
-                <p>{afterLoginMessage && afterLoginMessage} </p>
-            </>
+
+            {afterLoginMessage && afterLoginMessage}
         </>
     );
 };
