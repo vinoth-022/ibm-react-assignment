@@ -34,6 +34,9 @@ const Login = ({ setLoginStatus }) => {
 
         axios.post('http://localhost:5000/login', loginData)
             .then(response => {
+                
+                localStorage.setItem('userProfile', JSON.stringify(response.data))
+
                 setAfterLoginMessage(response.data.message);
                 alert(response.data.message); 
                 setLoginStatus(true);

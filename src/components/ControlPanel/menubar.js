@@ -22,7 +22,7 @@ const Menubar = ({ loginStatus }) => {
                     <li> <Link to={'/'}>Home</Link> </li>
                     <li> <Link to={'/emp'}>Display Employee</Link> </li>
                     <li> <Link to={'/createEmp'}>Add Employee</Link> </li>
-                    <li> <Link to={'/login'}>Update/View profile</Link> </li>
+                    <li> <Link to={'/profile'}>Update/View profile</Link> </li>
                     <li> <Link to={'/logout'}>Logout</Link> </li>
 
 

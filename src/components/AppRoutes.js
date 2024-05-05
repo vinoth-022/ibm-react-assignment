@@ -8,6 +8,8 @@ import { useState } from "react";
 import EmpList from "./DataUnit/Table/empList";
 import CreateEmployeeData from "./DataUnit/createEmployeeData";
 import Register from "./Pages/register";
+import Profile from "./Pages/profile";
+
 
 
 const AppRoutes = () => {
@@ -29,6 +31,7 @@ const AppRoutes = () => {
                         <Route path="home" element={<Home />} />
                         <Route path="emp" element={<EmpList />} />
                         <Route path="logout" element={<LogOut setLoginStatus={updateLoginStatus} />} />
+                        <Route exact path="profile" element={<Profile />} />
                         <Route exact path="/" element={<Home />} />
                         <Route exact path="createEmp" element={<CreateEmployeeData />} />
                         <Route path="*" element={<Page404 loginStatus={isLoggedIn} />} />
